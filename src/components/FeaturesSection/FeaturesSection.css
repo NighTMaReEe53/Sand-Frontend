@@ -1,0 +1,835 @@
+/* FeaturesSection — layout, card chrome, mockup frames, reduced-motion (§8) */
+
+.features-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 96px 24px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* ── Card ─────────────────────────────────────────────────────── */
+
+.feature-card {
+  --card-accent: #C9A15A; /* overridden inline per-card */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px;
+  border-radius: 20px;
+  border: 1px solid color-mix(in srgb, var(--card-accent) 22%, var(--color-border, #e5e5e2));
+  background:
+    radial-gradient(
+      circle at 12% -4%,
+      color-mix(in srgb, var(--card-accent) 7%, transparent),
+      transparent 42%
+    ),
+    var(--surface);
+  transform-style: preserve-3d;
+  perspective: 800px;
+  transition:
+    box-shadow 0.35s ease,
+    border-color 0.35s ease,
+    transform 0.35s ease;
+}
+
+/* CSS entrance — always completes, content can never stay hidden.
+   `backwards` (not `both`) so the finished animation releases its
+   transform grip and card hover/tilt transforms keep working. */
+.feature-card-enter {
+  animation: feature-card-rise 0.6s cubic-bezier(0.22, 0.68, 0.32, 1) backwards;
+}
+
+@keyframes feature-card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* decorative corner dots — echo the accent hue */
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 62px;
+  height: 40px;
+  pointer-events: none;
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--card-accent) 45%, transparent) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 10px 10px;
+  opacity: 0.65;
+  transition: opacity 0.35s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--card-accent) 55%, transparent);
+  box-shadow:
+    0 8px 20px -12px color-mix(in srgb, var(--card-accent) 22%, rgba(0, 0, 0, 0.14)),
+    var(--shadow-card-sm, 0 4px 14px rgba(0, 0, 0, 0.05));
+}
+
+.feature-card:hover::before {
+  opacity: 1;
+}
+
+.feature-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.feature-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.1) rotate(-6deg);
+}
+
+.feature-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.feature-card p {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary, #6b6b6b);
+  margin: 0;
+}
+
+/* ── Mockup shell ─────────────────────────────────────────────── */
+
+.feature-mockup {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 4px;
+}
+
+.mockup-list {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--color-border, var(--line));
+  background: var(--surface-alt);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* ── Window frame (title bar + dots + dot-grid body) ─────────── */
+
+.mockup-frame {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  border: 1px solid var(--color-border, var(--line));
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: 0 6px 18px -12px rgba(0, 0, 0, 0.14);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+
+.feature-card:hover .mockup-frame {
+  border-color: color-mix(in srgb, var(--frame-accent, #c9a15a) 45%, transparent);
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 22px -16px color-mix(in srgb, var(--frame-accent, #c9a15a) 30%, rgba(0, 0, 0, 0.14)),
+    0 4px 14px -8px rgba(0, 0, 0, 0.1);
+}
+
+.mockup-frame-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 13px;
+  border-bottom: 1px solid var(--color-border, var(--line));
+  background: linear-gradient(to bottom, var(--surface), var(--surface-alt));
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.frame-dots {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.frame-dots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--frame-accent, #c9a15a) 30%, var(--line));
+}
+
+.frame-dots i:first-child {
+  background: var(--frame-accent, #c9a15a);
+  animation: frame-dot-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes frame-dot-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+.frame-title {
+  margin-inline-start: auto;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--color-text-secondary, #6b6b6b);
+}
+
+.mockup-frame-body {
+  position: relative;
+  flex: 1;
+  padding: 10px;
+  /* faint dot-grid so panels feel alive even when static */
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1px);
+  background-size: 13px 13px;
+}
+
+.mockup-frame-body .mockup-list {
+  border: none;
+  background: transparent;
+  padding: 6px;
+}
+
+/* ── Shared mockup header (frontend_implamtion.md §3) ────────── */
+
+.mockup-header {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-text-secondary, #6b6b6b);
+  padding-inline-start: 4px;
+}
+
+/* ── MistakesMockup — red-accent rows with a warning nudge ───── */
+
+.mockup-mistakes .row {
+  background: transparent;
+}
+
+/* ── HomeworkVideoMockup — play button + question list ───────── */
+
+.mockup-homework {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.mockup-homework .play-button {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  font-size: 0.85rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.06);
+}
+
+.mockup-homework .question-list {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mockup-homework .q-row {
+  padding: 7px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border, #e5e5e2);
+  background: var(--surface);
+  font-size: 0.74rem;
+  color: var(--color-text-primary, #111111);
+}
+
+/* ── ExamQuizMockup — options + correct-answer reveal ────────── */
+
+.mockup-exam .q-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-text-primary, #111111);
+  margin-bottom: 2px;
+}
+
+.mockup-exam .option-row {
+  padding: 8px 11px;
+  border-radius: 9px;
+  border: 1px solid var(--color-border, #e5e5e2);
+  background: var(--surface);
+  font-size: 0.74rem;
+  color: var(--color-text-primary, #111111);
+}
+
+.mockup-exam .correct-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 1.2em;
+  font-size: 0.75rem;
+  font-weight: 800;
+  opacity: 0;
+}
+
+/* ── SettingsMockup — HD chip that pops when 1080p is picked ─── */
+
+.quality-hd {
+  position: absolute;
+  top: 8px;
+  inset-inline-end: 10px;
+  z-index: 1;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  opacity: 0; /* revealed by the GSAP timeline */
+  transform: scale(0.6);
+}
+
+/* ── ChatSupportMockup — question → typing dots → answer ────── */
+
+.mockup-chat {
+  gap: 8px;
+}
+
+.chat-bubble {
+  max-width: 88%;
+  padding: 8px 11px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.chat-bubble-user {
+  align-self: flex-start; /* RTL start = student's side */
+  color: var(--color-text-primary, #111111);
+  background: var(--surface);
+  border: 1px solid var(--color-border, #e5e5e2);
+  border-start-start-radius: 4px;
+}
+
+.chat-bubble-support {
+  position: relative;
+  align-self: flex-end;
+  color: var(--color-text-primary, #111111);
+  background: var(--color-sand-100, #f7f7f5);
+  border: 1px solid var(--color-border, #e5e5e2);
+  border-start-end-radius: 4px;
+}
+
+.chat-check {
+  position: absolute;
+  top: -7px;
+  inset-inline-start: -7px;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.chat-typing {
+  align-self: flex-end;
+  display: inline-flex;
+  gap: 4px;
+  padding: 9px 11px;
+  border-radius: 12px;
+  background: var(--color-sand-100, #f7f7f5);
+  border: 1px solid var(--color-border, #e5e5e2);
+}
+
+.chat-typing i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+/* ── LessonTimerMockup — ticking HH:MM:SS countdown ──────────── */
+
+.mockup-timer {
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 96px;
+}
+
+.timer-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--color-text-secondary, #6b6b6b);
+}
+
+.timer-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  direction: ltr;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-digit {
+  min-width: 40px;
+  padding: 6px 4px;
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 800;
+  border-radius: 10px;
+}
+
+.timer-sep {
+  font-size: 1.05rem;
+  font-weight: 800;
+  animation: timer-colon-blink 1s step-end infinite;
+}
+
+@keyframes timer-colon-blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.timer-progress {
+  width: 82%;
+  height: 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  overflow: hidden;
+}
+
+.timer-progress i {
+  display: block;
+  height: 100%;
+  transform-origin: left center;
+}
+
+/* ── ChallengeMockup — head-to-head score race ───────────────── */
+
+.mockup-challenge {
+  position: relative;
+  gap: 10px;
+}
+
+.vs-chip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  box-shadow: 0 0 0 3px var(--surface);
+}
+
+.player-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 11px;
+  border: 1px solid var(--color-border, #e5e5e2);
+  background: var(--surface);
+}
+
+.player-avatar {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.player-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.player-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--color-text-primary, #111111);
+}
+
+.player-score {
+  font-variant-numeric: tabular-nums;
+}
+
+.player-bar {
+  display: block;
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  overflow: hidden;
+}
+
+.player-bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  transform-origin: right center; /* RTL: bars grow from the right */
+  transform: scaleX(0);
+}
+
+/* ── Top3Mockup — exam leaderboard podium ────────────────────── */
+
+.mockup-podium {
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 34px;
+  min-height: 158px;
+}
+
+.trophy-badge {
+  position: absolute;
+  top: 4px;
+  left: calc(50% - 16px);
+  z-index: 1;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  opacity: 0; /* revealed by the GSAP timeline */
+}
+
+.podium-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 30%;
+}
+
+.podium-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.35;
+}
+
+.podium-name {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-text-primary, #111111);
+}
+
+.podium-score {
+  font-size: 0.66rem;
+  color: var(--ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.podium-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  border-radius: 10px 10px 4px 4px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--color-text-inverse);
+  transform-origin: bottom center;
+}
+
+/* ── IconOnlyMockup — sonar pings around the card icon ───────── */
+
+.mockup-icon-only {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding-block: 26px;
+  /* same dot-grid as framed panels */
+  background-color: var(--surface);
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 6%, transparent) 1px, transparent 1px);
+  background-size: 13px 13px;
+  border-radius: 14px;
+  border: none;
+}
+
+.icon-ping {
+  position: absolute;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border-width: 2px;
+  border-style: solid;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.mockup-icon-only .icon-core {
+  position: relative;
+  z-index: 1;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+}
+
+.mockup-icon-only .icon-core svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── SmartSearchMockup — typed Arabic query + results ────────── */
+
+.mockup-search .search-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 38px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1.5px solid;
+  background: var(--surface);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.mockup-search .typed-text {
+  font-size: 0.76rem;
+  color: var(--color-text-primary, #111111);
+  white-space: nowrap;
+}
+
+.mockup-search .cursor-blink {
+  width: 2px;
+  height: 14px;
+  border-radius: 1px;
+  animation: search-caret-blink 1s step-end infinite;
+}
+
+@keyframes search-caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.mockup-search .search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mockup-search .result-row {
+  padding: 8px 11px;
+  border-radius: 9px;
+  border: 1px solid var(--color-border, #e5e5e2);
+  background: var(--surface);
+  font-size: 0.73rem;
+  color: var(--color-text-primary, #111111);
+  opacity: 0; /* revealed by the GSAP timeline */
+}
+
+/* ── SummaryPdfMockup — downloadable summary files ────────────── */
+
+.mockup-files .file-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 9px 11px;
+  border-radius: 9px;
+  border: 1px solid var(--color-border, #e5e5e2);
+  background: var(--surface);
+  font-size: 0.74rem;
+  color: var(--color-text-primary, #111111);
+}
+
+.mockup-files .download-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+}
+
+/* icon + done-check stack in the same slot; check starts hidden */
+.mockup-files .download-state {
+  position: relative;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.mockup-files .download-done {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0;
+}
+
+/* ── Base mockup rows (shared by list-style panels) ──────────── */
+
+.mockup-list .row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 9px;
+  font-size: 0.78rem;
+  color: var(--ink);
+}
+
+.mockup-list .badge {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.mockup-list .row > .badge {
+  background: color-mix(in srgb, currentColor 18%, transparent);
+}
+
+.mockup-list .row-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.mockup-list .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mockup-list .row-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge-day {
+  width: auto !important;
+  min-width: 34px;
+  height: 18px !important;
+  padding: 0 6px;
+  border-radius: 6px !important;
+  font-size: 0.62rem !important;
+}
+
+.mockup-list .time {
+  margin-inline-start: auto;
+  font-size: 0.68rem;
+  color: var(--ink-muted);
+  direction: ltr;
+}
+
+.mockup-list .tag {
+  margin-inline-start: auto;
+  font-size: 0.62rem;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+  color: var(--ink-muted);
+}
+
+.mockup-list .radio {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: transparent;
+}
+
+/* ── Fake cursor ──────────────────────────────────────────────── */
+
+.mockup-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  opacity: 0.85;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+
+.mockup-cursor::before {
+  content: '▲';
+  position: absolute;
+  inset: 0;
+  display: block;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--ink);
+  transform: rotate(-45deg) translate(-2px, -2px);
+}
+
+/* ── Accessibility (§8): respect reduced-motion preferences ───── */
+
+@media (prefers-reduced-motion: reduce) {
+  .frame-dots i:first-child,
+  .mockup-cursor,
+  .mockup-search .cursor-blink,
+  .mockup-timer .timer-sep,
+  .mockup-list .badge,
+  .mockup-list .radio,
+  .mockup-list .dot {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,1044 @@
+/* ============================================================
+   ABOUT PAGE — «متحف التاريخ التفاعلي»
+   The page as a museum visit: arched exhibit frame with
+   spotlight beams, orbiting exhibit chips, ticker tape band,
+   brass stat plaques on a dark wall, engraved method plaques,
+   gallery corridor timeline (scroll-drawn rail), framed
+   exhibit cards, admission-ticket steps, curator portrait.
+   Tokens come from tokens.css / index.css.
+   ============================================================ */
+
+/* ─── MASTHEAD STRIP ──────────────────────────────────────── */
+.masthead-strip { align-items: center; }
+.strip-line {
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    color-mix(in srgb, var(--ink) 22%, transparent) 0 8px,
+    transparent 8px 14px
+  );
+}
+.strip-text {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+}
+
+/* ─── TICKET BADGE (hero pill with notches) ───────────────── */
+.ticket-badge {
+  position: relative;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  border: 1px dashed color-mix(in srgb, var(--primary) 40%, transparent);
+}
+.ticket-badge::before,
+.ticket-badge::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+}
+.ticket-badge::before { left: -6px; }
+.ticket-badge::after { right: -6px; }
+
+/* marker swipe behind an accent word */
+.marker-highlight {
+  position: relative;
+  display: inline-block;
+}
+.marker-highlight::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 14% -4% 4% -4%;
+  border-radius: 0.45em;
+  background: color-mix(in srgb, var(--warning) 20%, transparent);
+  transform: skew(-9deg) rotate(-1.2deg);
+}
+
+/* ─── HERO ARCH SCENE ─────────────────────────────────────── */
+.hero-arch-scene {
+  position: relative;
+  width: min(100%, 460px);
+  margin-inline: auto;
+  flex-shrink: 0;
+  padding-top: 3.2rem; /* room for the stamp */
+}
+@media (max-width: 1023px) {
+  .hero-arch-scene { width: min(100%, 340px); }
+}
+
+/* spotlight rig — two beams from a rail above the arch */
+.spotlight-rig {
+  position: absolute;
+  inset-inline: 6%;
+  top: 0.4rem;
+  height: 62%;
+  pointer-events: none;
+  z-index: 1;
+}
+.spot-rail {
+  position: absolute;
+  inset-inline: 12%;
+  top: 0;
+  height: 4px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--ink) 55%, transparent);
+}
+.spot-rail::before,
+.spot-rail::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--warning);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--warning) 25%, transparent);
+}
+.spot-rail::before { left: 8%; }
+.spot-rail::after { right: 8%; }
+
+.spot-beam {
+  position: absolute;
+  top: 6px;
+  width: 34%;
+  height: 96%;
+  clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--warning) 26%, transparent),
+    transparent 82%
+  );
+}
+.beam-a { left: 4%; transform: rotate(7deg); transform-origin: top center; }
+.beam-b { right: 4%; transform: rotate(-7deg); transform-origin: top center; }
+
+/* arched frame — double museum molding */
+.arch-frame {
+  position: relative;
+  z-index: 5;
+  border-radius: 999px 999px 26px 26px;
+  padding: 9px;
+  background: var(--surface);
+  border: 1.5px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  box-shadow:
+    0 0 0 7px var(--surface),
+    0 0 0 8.5px color-mix(in srgb, var(--primary) 18%, transparent),
+    var(--shadow-card-lg);
+}
+.arch-inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px 999px 20px 20px;
+  aspect-ratio: 3 / 3.6;
+  background:
+    radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--warning) 14%, transparent), transparent 60%),
+    var(--surface-alt);
+  border: 1px solid var(--line);
+}
+.arch-lottie-wrap {
+  position: absolute;
+  inset: 12% 8% 16%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.arch-lottie { width: 100%; height: 100%; }
+.arch-floor {
+  position: absolute;
+  bottom: 13%;
+  inset-inline: 14%;
+  height: 1.5px;
+  background: color-mix(in srgb, var(--ink) 18%, transparent);
+}
+.arch-floor::after {
+  content: '';
+  position: absolute;
+  inset-block-start: 5px;
+  inset-inline: 18%;
+  height: 1px;
+  opacity: 0.5;
+  background: color-mix(in srgb, var(--ink) 15%, transparent);
+}
+.arch-caption {
+  position: absolute;
+  bottom: 4.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: var(--ink);
+  background: color-mix(in srgb, #c9a86a 30%, #f4e9d3);
+  border: 1px solid color-mix(in srgb, #a8874d 55%, transparent);
+}
+
+/* orbiting exhibit chips */
+.orbit-chip {
+  position: absolute;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem 0.45rem 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card-lg);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+@media (max-width: 1023px) {
+  .orbit-chip { font-size: 0.6rem; padding-block: 0.32rem; }
+}
+.orbit-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border-width: 1px;
+  flex-shrink: 0;
+}
+
+/* rotating stamp badge */
+.hero-stamp {
+  position: absolute;
+  z-index: 35;
+  top: -1.4rem;
+  inset-inline-end: -4%;
+  width: clamp(88px, 19vw, 122px);
+  aspect-ratio: 1 / 1;
+}
+@media (max-width: 379px) {
+  .hero-stamp { display: none; }
+}
+.stamp-ring {
+  width: 100%;
+  height: 100%;
+  animation: stamp-spin 18s linear infinite;
+}
+.stamp-text {
+  font-size: 12.5px;
+  font-weight: 700;
+  fill: var(--secondary);
+  letter-spacing: 0.06em;
+}
+.stamp-core {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 34%;
+  height: 34%;
+  color: var(--warning);
+}
+@keyframes stamp-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* hide GSAP-animated pieces until their tween reveals them */
+@media (prefers-reduced-motion: no-preference) {
+  .orbit-chip,
+  .hub-chip,
+  .hub-core-circle,
+  .system-node-wrap,
+  .spot-beam {
+    visibility: hidden;
+  }
+}
+
+/* ─── SCROLL HINT ─────────────────────────────────────────── */
+.about-scroll-hint {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 3.2rem;
+  width: max-content;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 85%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--primary) 25%, transparent);
+}
+.mouse-outline {
+  display: block;
+  width: 22px;
+  height: 34px;
+  border: 2px solid color-mix(in srgb, var(--primary) 65%, transparent);
+  border-radius: 999px;
+  position: relative;
+}
+.mouse-wheel {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 3px;
+  height: 7px;
+  margin-left: -1.5px;
+  border-radius: 99px;
+  background: var(--warning);
+  animation: mouse-wheel-drop 1.6s ease-in-out infinite;
+}
+@keyframes mouse-wheel-drop {
+  0%   { transform: translateY(0); opacity: 1; }
+  70%  { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(10px); opacity: 0; }
+}
+.scroll-hint-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--ink-muted);
+  white-space: nowrap;
+}
+
+/* ─── TICKER BAND ─────────────────────────────────────────── */
+.ticker-band {
+  overflow: hidden;
+  position: relative;
+  background: var(--primary-strong);
+  border-block: 3px double color-mix(in srgb, #ddb44e 55%, transparent);
+  padding-block: 1.05rem;
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  gap: 3rem;
+  will-change: transform;
+}
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.05rem;
+}
+.ticker-item .star { color: #ddb44e; }
+
+/* ─── DARK WALL (stats + CTA) ─────────────────────────────── */
+.dark-wall { background: var(--primary-strong); }
+.stats-wall > * { position: relative; }
+.stat-divider {
+  position: absolute;
+  top: 12%;
+  bottom: 12%;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+}
+.stat-divider:nth-of-type(1) { left: 25%; }
+.stat-divider:nth-of-type(2) { left: 50%; }
+.stat-divider:nth-of-type(3) { left: 75%; }
+
+/* ─── MUSEUM SECTION HEAD — premium multi-font title system ───── */
+.museum-head {
+  position: relative;
+  padding: 2.5rem 0 2rem;
+}
+
+/* Main h2 — creative Cairo + Amiri mix (mirrors the Home page titles):
+   base in Cairo (clean sans) with the .title-blaka / WavyWord accents in
+   brand Amiri serif. Responsive: comfortably small on mobile, grand on desktop.
+   Generous line-height keeps Arabic comfortable to read. */
+.museum-head h2 {
+  text-align: center;
+  margin-inline: auto;
+  max-width: 900px;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  font-size: clamp(1.5rem, 1.1rem + 2.4vw, 2.85rem);
+  /* Subtle text shadow for depth (matches home .section-title-stroked feel) */
+  text-shadow: 0 2px 32px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+/* The accent span inside titles uses the elegant stylized font */
+.museum-head h2 .title-blaka {
+  font-weight: 700;
+  color: var(--primary);
+  display: inline-block;
+  /* Smooth underline decoration */
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--primary) 35%, transparent),
+    color-mix(in srgb, var(--primary) 60%, transparent),
+    color-mix(in srgb, var(--primary) 35%, transparent)
+  );
+  background-size: 100% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 3px;
+  transition: background-size 0.3s ease;
+}
+
+.museum-head-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.rule-line {
+  flex: 0 1 100px;
+  height: 1px;
+  background: linear-gradient(
+    to left,
+    transparent,
+    color-mix(in srgb, var(--primary) 35%, transparent),
+    transparent
+  );
+}
+
+.exhibit-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  /* Pill background for readability */
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+  border-radius: 100px;
+  padding: 0.25rem 0.85rem;
+}
+
+/* ─── WAVY UNDERLINE ──────────────────────────────────────── */
+.about-wavy {
+  position: relative;
+  display: inline-block;
+}
+.about-wavy-line {
+  position: absolute;
+  inset-inline: -2%;
+  bottom: -0.22em;
+  width: 104%;
+  height: 0.34em;
+  pointer-events: none;
+}
+
+/* ─── WATERMARK ───────────────────────────────────────────── */
+.about-watermark {
+  position: absolute;
+  top: -0.35em;
+  inset-inline-end: 0;
+  font-size: clamp(4rem, 10vw, 9rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--ink) 8%, transparent);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+/* ─── ENGRAVED PLAQUES (method pillars) ───────────────────── */
+.plaque-card {
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    linear-gradient(160deg, color-mix(in srgb, var(--primary) 30%, transparent), transparent 45%) border-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: box-shadow 0.35s ease;
+}
+.plaque-card:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.8), var(--shadow-card-lg); }
+.plaque-num {
+  position: absolute;
+  top: 1.1rem;
+  inset-inline-end: 1.4rem;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  color: color-mix(in srgb, var(--ink) 28%, transparent);
+}
+.plaque-icon {
+  display: inline-flex;
+  margin-bottom: 0.85rem;
+  padding: 0.65rem;
+  border-radius: 14px;
+  background: 'var(--primary-soft)';
+  border: 1px solid color-mix(in srgb, var(--primary) 22%, transparent);
+}
+.plaque-screw {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 35% 35%, #ffffff, color-mix(in srgb, var(--ink) 35%, transparent));
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+.plaque-screw.top-start { top: 10px; inset-inline-start: 10px; }
+.plaque-screw.top-end { top: 10px; inset-inline-end: 10px; }
+.plaque-screw.bottom-start { bottom: 10px; inset-inline-start: 10px; }
+.plaque-screw.bottom-end { bottom: 10px; inset-inline-end: 10px; }
+
+/* ─── WALL PLAQUE (mission / vision / system nodes / curator) */
+.wall-plaque {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  transition: box-shadow 0.35s ease;
+}
+.wall-plaque:hover { box-shadow: var(--shadow-card-lg); }
+.plaque-code {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--ink) 34%, transparent);
+}
+
+/* ─── GALLERY ROOM (wall around the corridor) ─────────────── */
+.gallery-room {
+  position: relative;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 44px,
+      color-mix(in srgb, var(--primary) 3%, transparent) 44px 45px
+    ),
+    linear-gradient(
+      color-mix(in srgb, var(--surface-alt) 55%, var(--bg)),
+      var(--bg)
+    );
+  border: 1px solid var(--line);
+  border-radius: 2rem;
+}
+/* crown molding */
+.gallery-room::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  inset-inline: 4%;
+  height: 2px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
+  box-shadow: 0 1.5px 0 rgba(255, 255, 255, 0.85);
+}
+/* baseboard + floor shadow line */
+.gallery-room::after {
+  content: '';
+  position: absolute;
+  bottom: 14px;
+  inset-inline: 4%;
+  height: 2px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--ink) 13%, transparent);
+  box-shadow: 0 -1.5px 0 rgba(255, 255, 255, 0.85), 0 6px 14px color-mix(in srgb, var(--ink) 7%, transparent);
+}
+
+/* ─── GALLERY CORRIDOR TIMELINE ───────────────────────────── */
+.corridor-rail,
+.corridor-fill {
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 50%;
+  width: 3px;
+  margin-left: -1.5px;
+  border-radius: 99px;
+  transform: translateX(-50%);
+}
+.corridor-rail {
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--line) 0 10px,
+    transparent 10px 18px
+  );
+}
+.corridor-fill {
+  background: linear-gradient(
+    to bottom,
+    var(--primary),
+    var(--secondary),
+    var(--warning),
+    var(--success)
+  );
+}
+/* glowing drop traveling down the rail — moved by the scroll
+   scrub tween (transform only), NOT by an infinite CSS animation */
+.corridor-pulse {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  width: 11px;
+  height: 11px;
+  margin-left: -5.5px;
+  border-radius: 999px;
+  background: var(--secondary);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--secondary) 18%, transparent),
+    0 0 16px color-mix(in srgb, var(--secondary) 55%, transparent);
+  will-change: transform;
+}
+
+/* diamond frame nodes hanging on the corridor rail */
+.frame-node {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  transform: rotate(45deg);
+  border-radius: 12px;
+  background: var(--surface);
+  border: 2px solid var(--dot, var(--line));
+  box-shadow: var(--shadow-card-lg);
+}
+.frame-node::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: inherit;
+  border: 1.5px solid color-mix(in srgb, var(--dot, var(--line)) 30%, transparent);
+  animation: node-breathe 2.8s ease-out infinite;
+  pointer-events: none;
+}
+.frame-node-icon {
+  transform: rotate(-45deg);
+  color: var(--dot, var(--ink));
+}
+@keyframes node-breathe {
+  0%   { transform: scale(0.9); opacity: 0.9; }
+  70%  { transform: scale(1.25); opacity: 0; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+
+/* nodes start dim and light up when the scroll line reaches them */
+@media (prefers-reduced-motion: no-preference) {
+  .corridor-item .frame-node {
+    opacity: 0.4;
+    filter: saturate(0.35);
+    transition:
+      opacity 0.45s ease,
+      filter 0.45s ease,
+      background-color 0.45s ease,
+      box-shadow 0.45s ease,
+      transform 0.45s var(--ease-out-soft);
+  }
+}
+.corridor-item.is-active .frame-node {
+  opacity: 1;
+  filter: none;
+  background: var(--dot, var(--primary));
+  border-color: var(--dot, var(--primary));
+  transform: rotate(45deg) scale(1.12);
+  box-shadow:
+    var(--shadow-card-lg),
+    0 0 26px color-mix(in srgb, var(--dot, var(--primary)) 40%, transparent);
+}
+.corridor-item.is-active .frame-node-icon { color: #ffffff; }
+
+/* the matching exhibit card also comes to life */
+.corridor-item .exhibit-card { transition: box-shadow 0.45s ease, border-color 0.45s ease; }
+.corridor-item.is-active .exhibit-card {
+  border-color: color-mix(in srgb, var(--ink) 22%, transparent);
+  box-shadow: var(--shadow-card-lg);
+}
+.corridor-item.is-active .exhibit-label { color: var(--warning); }
+.node-year {
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-muted);
+}
+
+/* framed exhibit cards — picture-frame molding */
+.exhibit-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  outline: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
+  outline-offset: 5px;
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+.exhibit-card:hover { box-shadow: var(--shadow-card-lg); }
+
+/* wire + nail the frame hangs from */
+.hang-wire {
+  position: absolute;
+  top: -21px;
+  left: 50%;
+  width: min(56%, 150px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+@media (min-width: 1024px) {
+  .exhibit-card .hang-wire { width: min(40%, 120px); }
+}
+.exhibit-label {
+  display: inline-block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--ink) 32%, transparent);
+}
+.year-chip { }
+
+/* big ghost year numeral inside each card */
+.ghost-year {
+  position: absolute;
+  z-index: 0;
+  bottom: -0.18em;
+  inset-inline-end: 0.4rem;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.2px color-mix(in srgb, var(--ink) 9%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* mobile: dashed rail along the start edge */
+@media (max-width: 1023px) {
+  .corridor-grid { padding-inline-start: 1.35rem; }
+  .corridor-grid::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    inset-inline-start: 3px;
+    border-inline-start: 2px dashed color-mix(in srgb, var(--ink) 15%, transparent);
+  }
+}
+
+/* ─── SYSTEM DIAGRAM ──────────────────────────────────────── */
+.sys-link {
+  position: relative;
+  width: clamp(48px, 6vw, 90px);
+  height: 3px;
+  border-radius: 99px;
+  background: var(--line);
+}
+.sys-packet {
+  position: absolute;
+  top: 50%;
+  left: -5%;
+  width: 9px;
+  height: 9px;
+  margin-top: -4.5px;
+  border-radius: 999px;
+  background: var(--secondary);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--secondary) 22%, transparent),
+    0 0 14px color-mix(in srgb, var(--secondary) 55%, transparent);
+  opacity: 0.95;
+}
+/* ─── ORBITAL HUB (system diagram) ────────────────────────── */
+.hub-orbit { min-width: 0; }
+
+/* dashed orbit track the modules ride on */
+.orbit-track {
+  position: absolute;
+  inset: 5%;
+  border-radius: 999px;
+  border: 1.5px dashed color-mix(in srgb, var(--primary) 28%, transparent);
+}
+.orbit-track::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 24%;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--secondary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary) 20%, transparent);
+}
+
+/* breathing rings around the core */
+.orbit-ring {
+  position: absolute;
+  inset: 17%;
+  border-radius: 999px;
+  border: 1.5px solid color-mix(in srgb, var(--primary) 22%, transparent);
+  animation: hub-pulse 2.8s ease-out infinite;
+  pointer-events: none;
+}
+.orbit-ring.ring-b { animation-delay: 1.4s; }
+
+.hub-spokes-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hub-spoke-line { stroke-dasharray: 1; }
+}
+
+/* the glowing circular core */
+.hub-core-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 54%;
+  aspect-ratio: 1 / 1;
+  border-radius: 999px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.35rem;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at 32% 26%, color-mix(in srgb, var(--warning) 18%, transparent), transparent 55%),
+    var(--surface);
+  border: 1.5px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  box-shadow:
+    0 0 0 7px var(--surface),
+    0 0 0 8px var(--line),
+    var(--shadow-card-lg);
+  z-index: 5;
+}
+.hub-core-circle h3 {
+  font-weight: 700;
+  font-size: clamp(1rem, 2.6vw, 1.25rem);
+  color: var(--primary);
+}
+.hub-core-circle p {
+  font-size: 0.62rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+/* module chips — pills on the orbit (md+) or grid items (mobile) */
+.hub-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--primary) 16%, var(--line));
+  box-shadow: var(--shadow-card-lg);
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.hub-chip:hover {
+  transform: translateY(-2px) scale(1.05);
+  border-color: color-mix(in srgb, var(--primary) 40%, transparent);
+}
+.hub-orbit .hub-chip {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+/* orbital layer only from md up — mobile uses the compact grid */
+@media (max-width: 767px) {
+  .hub-orbit .hub-chip { display: none; }
+}
+@keyframes hub-pulse {
+  0%   { transform: scale(0.85); opacity: 0.9; }
+  70%  { transform: scale(1.35); opacity: 0; }
+  100% { transform: scale(1.35); opacity: 0; }
+}
+
+/* ─── GALLERY WALL WINGS ──────────────────────────────────── */
+.wing-frame {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  /* inner second molding like a picture frame */
+  box-shadow:
+    inset 0 0 0 4px var(--bg),
+    inset 0 0 0 5px color-mix(in srgb, var(--ink) 7%, transparent),
+    var(--shadow-card);
+  transition: box-shadow 0.35s ease;
+}
+.wing-frame:hover {
+  box-shadow:
+    inset 0 0 0 4px var(--bg),
+    inset 0 0 0 5px color-mix(in srgb, var(--ink) 10%, transparent),
+    var(--shadow-gold-glow);
+}
+.wing-code {
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+/* ─── ADMISSION TICKETS ───────────────────────────────────── */
+.admission-ticket {
+  --notch: var(--color-bg, #ffffff);
+  position: relative;
+  border-radius: 16px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.35s ease;
+}
+.admission-ticket:hover { box-shadow: var(--shadow-card-lg); }
+/* punched notches on both sides */
+.admission-ticket::before,
+.admission-ticket::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  margin-top: -11px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  z-index: 1;
+}
+.admission-ticket::before { left: -12px; }
+.admission-ticket::after { right: -12px; }
+/* perforated stub divider */
+.admission-ticket .ticket-no {
+  position: absolute;
+  top: 0.85rem;
+  inset-inline-end: 1.1rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--ink) 32%, transparent);
+  padding-bottom: 0.55rem;
+  background-image: linear-gradient(
+    to left,
+    color-mix(in srgb, var(--ink) 18%, transparent) 50%,
+    transparent 50%
+  );
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+}
+.step-num { line-height: 1.15; }
+
+/* ─── CURATOR PORTRAIT FRAME ──────────────────────────────── */
+.portrait-frame {
+  position: relative;
+  padding: 10px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1.5px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  box-shadow:
+    0 0 0 6px var(--surface),
+    0 0 0 7.5px color-mix(in srgb, var(--primary) 16%, transparent),
+    var(--shadow-card-lg);
+}
+.portrait-lottie {
+  display: block;
+  width: min(100%, 300px);
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+}
+.portrait-caption {
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  white-space: nowrap;
+  padding: 0.3rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: var(--primary);
+}
+.cta-lottie { aspect-ratio: 1 / 1; }
+
+/* ─── TYPOGRAPHY SYSTEM (creative, eye-comfortable, consistent) ───
+   Body   → IBM Plex Sans  (highly legible Arabic UI)
+   Headings → Cairo        (clean sans, contrasts the serif titles)
+   Section titles → Amiri  (.museum-head h2)
+   Accents → Amiri         (.about-serif, .title-blaka)
+   ───────────────────────────────────────────────────────────────── */
+.heritage-container {
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+.heritage-container h3,
+.heritage-container .plaque-card h3,
+.heritage-container .hub-core-circle h3 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+}
+.heritage-container p {
+  line-height: 1.9;
+  letter-spacing: 0.004em;
+}
+/* Comfortable, compact body copy on phones */
+@media (max-width: 640px) {
+  .heritage-container p { font-size: 0.9rem; line-height: 1.8; }
+  .heritage-container li { font-size: 0.86rem; }
+  .heritage-container .plaque-card { padding: 1.25rem; }
+  .heritage-container .exhibit-card { padding: 1.25rem; }
+}
+
+/* Elegant serif accent — brand Amiri for quotes, captions, serif lines */
+.about-serif {
+  font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+}
+
+/* ─── DOODLE PATHS (GSAP draws them in) ───────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .about-doodle-path { stroke-dasharray: 1; }
+}
+
+/* ─── GPU HARDWARE ACCELERATION & LAYER PROMOTION ───────── */
+.hero-arch-scene,
+.arch-frame,
+.orbit-chip,
+.stamp-ring,
+.corridor-item,
+.exhibit-card,
+.hub-orbit,
+.plaque-card,
+.wall-plaque,
+.wing-frame,
+.admission-ticket {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.orbit-chip,
+.stamp-ring,
+.ticker-track,
+.sys-packet {
+  will-change: transform;
+}
+
+/* ─── REDUCED MOTION ──────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .float-slow,
+  .float-slower,
+  .frame-node::after,
+  .orbit-ring,
+  .stamp-ring,
+  .mouse-wheel,
+  .ticker-track {
+    animation: none !important;
+  }
+}

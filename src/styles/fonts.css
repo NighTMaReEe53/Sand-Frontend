@@ -1,0 +1,89 @@
+/* ════════════════════════════════════════════════════════════════
+   SANAD — COMPLETE FONT LIBRARY
+   Loaded from /public/fonts (Vite serves public/ at root).
+   Fonts only download when actually used (font-display: swap).
+
+   ROLE MAP (comfortable, eye-friendly creative hierarchy):
+     --font-title   Amiri            → hero, h1/h2, section + logo (elegant serif identity)
+     --font-heading Cairo            → h3–h6, card titles, sub-headings (clean sans contrast)
+     --font-body    IBM Plex Sans    → paragraphs, UI, forms (highly legible)
+     --font-nav     Tajawal          → navbar links & nav labels
+     --font-deco    OI               → badges, ribbons, accents (playful display)
+     --font-accent  Meila            → quotes, short call-outs
+   ════════════════════════════════════════════════════════════════ */
+
+/* ─── Amiri (titles / logo) ─────────────────────────────────── */
+@font-face { font-family: "Amiri"; src: url("/fonts/Amiri/Amiri-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Amiri"; src: url("/fonts/Amiri/Amiri-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Amiri"; src: url("/fonts/Amiri/Amiri-Italic.ttf") format("truetype"); font-weight: 400; font-style: italic; font-display: swap; }
+
+/* ─── IBM Plex Sans Arabic (body) ────────────────────────────── */
+@font-face { font-family: "IBM Plex Sans Arabic"; src: url("/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans Arabic"; src: url("/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans Arabic"; src: url("/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "IBM Plex Sans Arabic"; src: url("/fonts/IBM_Plex_Sans_Arabic/IBMPlexSansArabic-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+
+/* ─── Tajawal (nav / UI) ────────────────────────────────────── */
+@font-face { font-family: "Tajawal"; src: url("/fonts/tajawal/Tajawal-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Tajawal"; src: url("/fonts/tajawal/Tajawal-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Tajawal"; src: url("/fonts/tajawal/Tajawal-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Tajawal"; src: url("/fonts/tajawal/Tajawal-Black.ttf") format("truetype"); font-weight: 900; font-display: swap; }
+
+/* ─── Cairo (headings) ──────────────────────────────────────── */
+@font-face { font-family: "Cairo"; src: url("/fonts/Cairo_Play/static/CairoPlay-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Cairo"; src: url("/fonts/Cairo_Play/static/CairoPlay-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Cairo"; src: url("/fonts/Cairo_Play/static/CairoPlay-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Cairo"; src: url("/fonts/Cairo_Play/static/CairoPlay-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Cairo"; src: url("/fonts/Cairo_Play/static/CairoPlay-Black.ttf") format("truetype"); font-weight: 900; font-display: swap; }
+
+/* ─── OI (decorative display) ───────────────────────────────── */
+@font-face { font-family: "OI"; src: url("/fonts/Oi/meila-arabic-demo.line-light.otf") format("truetype"); font-weight: 400; font-display: swap; }
+
+/* ─── Meila (accent script) ─────────────────────────────────── */
+@font-face { font-family: "Meila"; src: url("/fonts/meila-arabic-demo/MeilaArabicDEMO-LineRegular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Meila"; src: url("/fonts/meila-arabic-demo/MeilaArabicDEMO-Solid.otf") format("opentype"); font-weight: 700; font-display: swap; }
+
+/* ─── Amira / School (playful display) ──────────────────────── */
+@font-face { font-family: "Amira"; src: url("/fonts/school/Amira.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "School"; src: url("/fonts/school/School.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+
+/* ─── Montserrat Arabic (labels / buttons) ──────────────────── */
+@font-face { font-family: "Montserrat Arabic"; src: url("/fonts/Montserrat/ArbFONTS-Montserrat-Arabic-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Montserrat Arabic"; src: url("/fonts/Montserrat/ArbFONTS-Montserrat-Arabic-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Montserrat Arabic"; src: url("/fonts/Montserrat/ArbFONTS-Montserrat-Arabic-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Montserrat Arabic"; src: url("/fonts/Montserrat/ArbFONTS-Montserrat-Arabic-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+
+/* ─── Sans alternatives (UI / numbers / variety) ────────────── */
+@font-face { font-family: "DIN Next LT Arabic"; src: url("/fonts/DIN Next LT Arabic/ARBFONTS-DINNEXTLTARABIC-REGULAR-4.TTF") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "DIN Next LT Arabic"; src: url("/fonts/DIN Next LT Arabic/ARBFONTS-DINNEXTLTARABIC-MEDIUM-4.TTF") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "DIN Next LT Arabic"; src: url("/fonts/DIN Next LT Arabic/ARBFONTS-DINNEXTLTARABIC-BOLD-4.TTF") format("truetype"); font-weight: 700; font-display: swap; }
+
+@font-face { font-family: "SST Arabic"; src: url("/fonts/sst/SST-ARABIC-ROMAN-1.TTF") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "SST Arabic"; src: url("/fonts/sst/alfont_com_AlFont_com_SST-Arabic-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+
+@font-face { font-family: "Expo Arabic"; src: url("/fonts/Expo Arabic/EXPO ARABIC BOOK.TTF") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Expo Arabic"; src: url("/fonts/Expo Arabic/EXPO ARABIC SEMIBOLD.TTF") format("truetype"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Expo Arabic"; src: url("/fonts/Expo Arabic/EXPO ARABIC BOLD.OTF") format("opentype"); font-weight: 700; font-display: swap; }
+
+@font-face { font-family: "Graphik Arabic"; src: url("/fonts/Graphik Arabic/GRAPHIK ARABIC LIGHT.OTF") format("opentype"); font-weight: 300; font-display: swap; }
+@font-face { font-family: "Graphik Arabic"; src: url("/fonts/Graphik Arabic/GRAPHIK ARABIC.OTF") format("opentype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Graphik Arabic"; src: url("/fonts/Graphik Arabic/GRAPHIK ARABIC BOLD.OTF") format("opentype"); font-weight: 700; font-display: swap; }
+
+@font-face { font-family: "Al-Jazeera Arabic"; src: url("/fonts/Al-Jazeera-Arabic/AL-JAZEERA-ARABIC-REGULAR.TTF") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Al-Jazeera Arabic"; src: url("/fonts/Al-Jazeera-Arabic/AL-JAZEERA-ARABIC-BOLD.TTF") format("truetype"); font-weight: 700; font-display: swap; }
+
+@font-face { font-family: "GHAITHSANS"; src: url("/fonts/GHAITHSANS/GHAITHSANS-REGULAR.OTF") format("opentype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "GHAITHSANS"; src: url("/fonts/GHAITHSANS/GHAITHSANS-BOLD.OTF") format("opentype"); font-weight: 700; font-display: swap; }
+
+@font-face { font-family: "Helvetica Arabic"; src: url("/fonts/Helvetica/HELVETICANEUELT-ARABIC-55-ROMAN.TTF") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Helvetica Arabic"; src: url("/fonts/Helvetica/HELVETICANEUELTARABIC-BOLD.TTF") format("truetype"); font-weight: 700; font-display: swap; }
+
+@font-face { font-family: "RB Arabic"; src: url("/fonts/RB/RB REGULAR.TTF") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "RB Arabic"; src: url("/fonts/RB/RB BOLD.TTF") format("truetype"); font-weight: 700; font-display: swap; }
+
+/* ─── Decorative scripts ────────────────────────────────────── */
+@font-face { font-family: "FunPlay Arabic"; src: url("/fonts/fun-play-arabic-demo/FunPlayArabic_DEMO-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Lutfey Arabic"; src: url("/fonts/lutfey-arabic-demo/LutfeyArabicDEMO-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Retro Brush"; src: url("/fonts/retro-brush-arabic-personal-use-only/RetroBrushArabicPersonalUseOnly-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Lemon Brush"; src: url("/fonts/lemon-brush-personal-use-only/LemonBrushArabicPersonalUseOnly-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "ITC Handel Gothic"; src: url("/fonts/ITC Handel Gothic/ALFONT_COM_ITC-HANDEL-GOTHIC-ARABIC-HEAVY.TTF") format("truetype"); font-weight: 900; font-display: swap; }

@@ -1,0 +1,276 @@
+/* ============================================================
+   DESIGN TOKENS — Single source of truth
+   Implamtion_plan.md §2 — EduLearn visual language:
+   white/off-white base + near-black ink, ONE gold accent used
+   sparingly (badges/highlights only). Motion adds life instead
+   of color. No component may hardcode these values.
+   ============================================================ */
+   
+:root {
+  /* ── FeaturesSection card palette (frontend_implamtion.md §10) ── */
+  --color-content: #FDBA3B;
+  --color-schedule: #22C55E;
+  --color-quality: #3B82F6;
+  --color-mistakes: #EF4444;
+  --color-homework: #22C55E;
+  --color-exams: #6366F1;
+  --color-emotional-support: #F59E0B;
+  --color-academic-support: #818CF8;
+  --color-tech-support: #14B8A6;
+  --color-smart-search: #06B6D4;
+  --color-summaries: #D97706;
+
+  /* Dark bands / footer / CTA — near-black instead of navy */
+  --color-navy-950: #0a0a0a;
+  --color-navy-900: #111111;
+  --color-navy-800: #1a1a1a;
+  --color-navy-700: #262626;
+
+  /* Legacy "gold" utilities are the blue brand accent in light mode.
+     The class names stay for compatibility, but no warm-gold tint leaks
+     into light screens. */
+  --color-gold-900-token: #071625;
+  --color-gold-800-token: #0a1c30;
+  --color-gold-700-token: #0d2137;
+  --color-gold-600-token: #123a65;
+  --color-gold-500-token: #0d2137;
+  --color-gold-400-token: #1b4b84;
+  --color-gold-300-token: #5f85b4;
+  --color-gold-200-token: #d5e3f3;
+  --color-gold-100-token: #e9eff6;
+  --color-gold-400: #0D2137;
+  --gradient-gold: linear-gradient(135deg, #0D2137 0%, #081625 100%);
+  --gradient-gold-hover: linear-gradient(135deg, #1B4B84 0%, #0D2137 100%);
+
+  /* Neutral - White / off-white (light backgrounds) */
+  --color-sand-50: #ffffff;
+  --color-sand-100: #f7f7f5;
+  --color-sand-200: #efefec;
+
+  /* Text */
+  --color-text-primary: #111111;
+  --color-text-secondary: #6b6b6b;
+  --color-text-inverse: #ffffff;
+
+  /* Semantic */
+  --color-success: #2e9e6b;
+  --color-danger: #b3432f;
+  --color-border: #e5e5e2;
+
+  /* Base surfaces */
+  --color-white: #ffffff;
+  --color-black: #111111;
+
+  /* Shadows (§2: modern, lightweight shadow-sm elevation) */
+  --shadow-card: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-card-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-gold-glow: 0 2px 8px -2px rgba(184, 134, 11, 0.12);
+  --shadow-gold-glow-lg: 0 4px 12px -2px rgba(184, 134, 11, 0.16);
+
+  /* Typography scale */
+  --font-display: 3.25rem;
+  --font-h1: 2.5rem;
+  --font-h2: 1.875rem;
+  --font-h3: 1.375rem;
+  --font-body-lg: 1.125rem;
+  --font-body: 1rem;
+  --font-caption: 0.875rem;
+
+  --lh-tight: 1.2;
+  --lh-normal: 1.6;
+  --lh-relaxed: 1.8;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* Shape language */
+  --radius-card: 16px;
+  --radius-card-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   EDULEARN THEME TOKENS — Implamtion_plan.md §2 (tokens)
+   Single light theme; no mode switching.
+   Components must consume these vars — never hardcode hex values.
+   ============================================================ */
+
+:root {
+  /* EduLearn core tokens (§2) */
+  --color-bg: #ffffff;
+  --color-bg-soft: #f7f7f5;
+
+
+  /* Color system — white paper with one consistent navy-blue accent. */
+  --bg: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-alt: #F7F7F5;
+  --ink: #111111;
+  --ink-muted: #6B6B6B;
+  /* Brand primary — deep navy */
+  --primary: #0D2137;
+  --primary-strong: #081625;
+  /* Brand secondary — lighter navy for hovers/gradients */
+  --secondary: #1B4B84;
+  --secondary-strong: #143A69;
+  /* Soft tint of the primary for icon chips / soft surfaces */
+  --primary-soft: #E9EFF6;
+  --gold: var(--primary);
+  --gold-bright: var(--secondary);
+  --line: #E5E5E2;
+  --on-primary: #FFFFFF;
+  --on-secondary: #FFFFFF;
+
+  /* Semantic status colors */
+  --success: #2E9E6B;
+  --error: #B3432F;
+  --warning: #C9922E;
+  --info: #1B4B84;
+
+  /* Accent: cool teal-blue — contrast partner for primary navy */
+  --accent:        #1e6a8e;
+  --accent-strong: #165a78;
+  --accent-soft:   rgba(30, 106, 142, 0.10);
+
+  /* Layout tokens (§2 spacing & layout) */
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --shadow-elevated: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
+  --container-max: 1200px;
+  --section-pad-y: clamp(56px, 7vw, 96px);
+
+  /* Navbar scrolled state shadow (§12.1) */
+  --shadow-nav-scrolled: 0 4px 16px -8px rgba(0, 0, 0, 0.15);
+
+  /* ─── Font Roles ───────────────────────────────────────────
+     Creative, eye-friendly hierarchy:
+       --font-title   Amiri            → hero / h1–h2 / section / logo (elegant serif identity)
+       --font-heading Cairo            → h3–h6 / card titles / sub-headings (clean sans contrast)
+       --font-body    IBM Plex Sans    → paragraphs / UI / forms (highly legible)
+       --font-nav     Tajawal          → navbar links & nav labels
+       --font-deco    OI               → badges / ribbons / accents (playful display)
+       --font-accent  Meila            → quotes / short call-outs
+     Plus the full library as utility families (font-amira, font-school, …).
+     ────────────────────────────────────────────────────────── */
+  --font-logo: 'Amiri', serif;
+  --font-title: 'Amiri', serif;
+  --font-heading: 'Cairo', sans-serif;
+  --font-body: 'IBM Plex Sans Arabic', sans-serif;
+  --font-nav: 'Tajawal', sans-serif;
+  --font-deco: 'OI', cursive;
+  --font-accent: 'Meila', cursive;
+  --font-label: 'Montserrat Arabic', sans-serif;
+  --font-ui: 'DIN Next LT Arabic', sans-serif;
+
+  /* Aliases used by legacy components */
+  --ivory: var(--ink);
+  --ivory-muted: var(--ink-muted);
+  --surface-raised: var(--surface);
+
+  color-scheme: light;
+}
+
+/* Dark mode deliberately uses a near-black paper surface, warm yellow for
+   primary actions, and soft white for reading. Components consume these
+   semantic tokens, so their hierarchy stays intact in either mode. */
+:root[data-theme='dark'] {
+  /* ── Base canvas: pure near-black, easy on the eyes ── */
+  --bg:          #1f1f1f;
+  --surface:     #272727;         /* card / panel  ≈ rgba(#fff, 0.055) on #1f1f1f */
+  --surface-alt: #2e2e2e;         /* slightly raised surface */
+  --surface-raised: #353535;      /* hover / focus raised layer */
+
+  /* ── Text ── */
+  --ink:         #EEEBE4;         /* warm off-white — not pure #fff (harsh) */
+  --ink-muted:   #9A9490;         /* warm mid-grey — readable, calm */
+
+  /* ── Primary accent: true distinct modern YELLOW — energetic, comfortable, distinct from gold ── */
+  --primary:        #F5C518;      /* modern canary-yellow — أصفر مميز ومريح */
+  --primary-strong: #DEAC0C;      /* deeper yellow for active/hover */
+  --primary-soft:   rgba(245, 197, 24, 0.12);
+  --gold:           #F5C518;
+  --gold-bright:    #FFDB58;
+  /* Direct legacy references retain the dark-mode yellow accent. */
+  --color-gold-400: #F5C518;
+
+  /* ── Secondary: amber-yellow complement ── */
+  --secondary:        #FBBF24;
+  --secondary-strong: #F59E0B;
+
+  /* ── Borders: subtle warm grey — no cold blue ── */
+  --line: #363636;
+
+  /* ── On-primary: deep solid black for 100% readable, crystal-clear contrast on yellow ── */
+  --on-primary:   #121212;
+  --on-secondary: #121212;
+
+  /* ── Legacy alias ── */
+  --color-bg:        #1f1f1f;
+  --color-bg-soft:   #272727;
+  --color-sand-50:   #2e2e2e;
+  --color-sand-100:  #353535;
+  --color-sand-200:  #3e3e3e;
+  --color-text-primary:   #EEEBE4;
+  --color-text-secondary: #9A9490;
+  --color-text-inverse:   #1f1f1f;
+  --color-border: #363636;
+  --color-white:  #EEEBE4;
+  --color-black:  #1f1f1f;
+
+  /* ── Status ── */
+  --success: #4ADE80;
+  --error:   #F87171;
+  --warning: #FBBF24;
+  --info:    #60A5FA;
+
+  /* ── Accent: muted teal — contrast partner for warm-gold primary ── */
+  --accent:        #3b8aad;
+  --accent-strong: #2d7291;
+  --accent-soft:   rgba(59, 138, 173, 0.12);
+
+  /* ── Shadows ── */
+  --shadow-card:         0 2px 8px rgba(0, 0, 0, 0.30);
+  --shadow-card-lg:      0 6px 20px rgba(0, 0, 0, 0.36);
+  --shadow-gold-glow:    0 0 16px -6px rgba(200, 169, 110, 0.20);
+  --shadow-gold-glow-lg: 0 0 28px -8px rgba(200, 169, 110, 0.28);
+  --shadow-nav-scrolled: 0 4px 16px -4px rgba(0, 0, 0, 0.50);
+  --shadow-elevated:     0 4px 12px -2px rgba(0, 0, 0, 0.40);
+
+  /* ── Gold gradients ── */
+  --gradient-gold:       linear-gradient(135deg, #DCBC82 0%, #C8A96E 50%, #9E7B45 100%);
+  --gradient-gold-hover: linear-gradient(135deg, #EDD49A 0%, #D4B378 50%, #B8954F 100%);
+
+  /* ── Aliases ── */
+  --ivory:       var(--ink);
+  --ivory-muted: var(--ink-muted);
+
+  color-scheme: dark;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INSTANT THEME SWITCHING — No-transition frame
+   The ThemeProvider sets [data-theme-switching] on <html> for
+   exactly ONE requestAnimationFrame before removing it.
+   During that single frame every CSS transition is suppressed,
+   making the theme flip feel instantaneous even when hundreds
+   of animated elements are on screen.
+   ═══════════════════════════════════════════════════════════ */
+[data-theme-switching],
+[data-theme-switching] *,
+[data-theme-switching] *::before,
+[data-theme-switching] *::after {
+  transition: none !important;
+  animation-duration: 0.01ms !important;
+}
+
+.color-gold{
+   color: #C9A15A;
+} 
+
+/* Contrast rule (§2.3): gold/primary as TEXT is only allowed on
+   --primary-soft or --surface-alt — never as body copy on --surface/--bg. */

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="منصة تعليمية مصرية بتسهّل المذاكرة، وتجمع الكورسات والاختبارات والمتابعة في مكان واحد." />
+    <meta name="theme-color" content="#0D2137" />
+  <title>سند | منصتك للمذاكرة والتفوّق</title>
+
+    <!-- Perf: preload the hero image (LCP element on the homepage) -->
+    <link rel="preload" as="image" href="/image/hero-section.png" fetchpriority="high" />
+    <!-- Perf: preload the navbar logo (appears on every page above the fold) -->
+    <link rel="preload" as="image" href="/image/logo.png" fetchpriority="high" />
+    <!-- Perf: preload local Arabic primary fonts -->
+    <link rel="preload" href="/fonts/school/Amira.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/DIN%20Next%20LT%20Arabic/ARBFONTS-DINNEXTLTARABIC-BOLD-4.TTF" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/sst/alfont_com_AlFont_com_SST-Arabic-Bold.ttf" as="font" type="font/ttf" crossorigin />
+
+    <!-- Favicon: Lucide "graduation-cap" in brand gold on dark surface -->
+    <link
+      rel="icon"
+      href="image/logo.png"
+    />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem('sanad-theme');
+        document.documentElement.dataset.theme = savedTheme === 'dark' ? 'dark' : 'light';
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    </script>
+  </head>
+  <body class="bg-bg text-ivory font-sans antialiased overflow-x-hidden min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
