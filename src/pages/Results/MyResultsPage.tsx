@@ -19,6 +19,7 @@ import {
   ChevronLeft,
   Flame,
   CheckCheck,
+  Sparkles,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { examsApi, MyResultItem } from '../../api/exams.api';
